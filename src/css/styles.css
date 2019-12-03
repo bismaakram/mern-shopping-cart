@@ -9,6 +9,32 @@
   font-size: 14px;
   border-radius: 4px;
 }
+.my-btn {
+  width: 50%;
+}
 .blue {
   background-color: #008cba;
+}
+ul {
+  list-style-type: none;
+}
+.my-col {
+  display: flex;
+  flex-flow: column;
+}
+.details {
+  margin-top: auto;
+}
+.card-img-top {
+  object-fit: cover;
+  width: 100%;
+  height: 24vw;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .card-img-top {
+    object-fit: cover;
+    width: 100%;
+    height: 115vw;
+  }
 }
