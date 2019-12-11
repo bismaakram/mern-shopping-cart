@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
-
 import Book from "./book.component.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/styles.css";

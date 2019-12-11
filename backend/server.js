@@ -2,36 +2,15 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
+
 const mongoose = require("mongoose");
 let Book = require("./models/bookModel");
-var session = require("express-session");
-var MongoStore = require("connect-mongo")(session);
-var flash = require("connect-flash");
 
+const stripe = require("stripe")("sk_test_rAes6658b2t2uNKCD34VfuaW00l2nGfGtQ");
 const port = 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
-
-app.use(cookieParser());
-
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 180 * 60 * 1000 }
-  })
-);
-
-app.use(function(req, res, next) {
-  res.locals.session = req.session;
-  next();
-});
-
-app.use(flash());
 
 mongoose.connect("mongodb://127.0.0.1:27017/books", { useNewUrlParser: true });
 const connection = mongoose.connection;

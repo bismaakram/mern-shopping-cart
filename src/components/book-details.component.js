@@ -1,12 +1,25 @@
 import React, { Component } from "react";
 import "../css/styles.css";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
 import axios from "axios";
+import Cart from "./cart1.component";
 
 export default class BookDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: []
+      book: [],
+      modal: false
     };
   }
 
@@ -20,14 +33,19 @@ export default class BookDetails extends Component {
         console.log(err);
       });
   }
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
 
   AddToCart = e => {
     const { book } = this.state;
     let id = book._id;
-    let title = book.title;
+    let cover = book.cover;
     let price = book.price;
     let qty = 1;
-    let product = { id: id, title: title, price: price, qty: qty };
+    let product = { id: id, cover: cover, price: price, qty: qty };
     let existing = JSON.parse(sessionStorage.getItem("cart"));
     existing = existing ? existing : [];
     let val = existing.filter(item => item.id === id);
@@ -46,7 +64,6 @@ export default class BookDetails extends Component {
     }
 
     sessionStorage.setItem("cart", JSON.stringify(existing));
-    window.location.href = "http://localhost:3000/cart/";
   };
 
   render() {
@@ -67,11 +84,20 @@ export default class BookDetails extends Component {
             <p>{book.description}</p>
             <button
               id={book._id}
-              onClick={this.AddToCart}
-              class="btn btn-success"
+              onClick={() => {
+                this.toggle();
+                this.AddToCart();
+              }}
+              className="btn btn-success"
             >
               Add to Cart
             </button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle}>
+              <ModalHeader toggle={this.toggle}>My Cart</ModalHeader>
+              <ModalBody>
+                <Cart></Cart>
+              </ModalBody>
+            </Modal>
           </div>
         </div>
       </div>

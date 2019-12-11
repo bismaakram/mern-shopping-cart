@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import CartItem from "./cart1-item.component.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { throws } from "assert";
@@ -59,9 +60,6 @@ export default class Cart extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <h2>Shopping Cart</h2>
-        </div>
         <div className="row">{this.checkItems()}</div>
       </div>
     );

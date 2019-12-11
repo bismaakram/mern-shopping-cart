@@ -5,7 +5,7 @@ export default class Navigation extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+        <a className="navbar-brand" href="#">
           BookStore
         </a>
         <button
