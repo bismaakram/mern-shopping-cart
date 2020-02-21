@@ -35,7 +35,7 @@ export default class Cart extends Component {
   }
 
   Calculate = item => {
-    return item.qty * item.price;
+    return (item.qty * item.price).toFixed(2);
   };
 
   checkItems = () => {

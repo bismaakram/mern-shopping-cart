@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import img from "../images/csharp.jpg";
 
 const CartItem = props => {
   return (
     <tr>
       <td>
-        <img src={img}></img>
+        <img
+          src={require("" + `./images/${props.book.cover}`)}
+          width="210"
+          height="300"
+        ></img>
       </td>
       <td>{props.book.qty}</td>
       <td>{props.Calculate(props.book)}</td>

@@ -5,7 +5,7 @@ const Book = props => (
   <div className="col-12 col-sm-3 d-flex">
     <div className="card">
       <img
-        src={require(`../images/${props.book.cover}`)}
+        src={require(`./images/${props.book.cover}`)}
         className="card-img-top img-fluid"
       ></img>
       <div className="card-body">

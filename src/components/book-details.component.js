@@ -19,7 +19,8 @@ export default class BookDetails extends Component {
     super(props);
     this.state = {
       book: [],
-      modal: false
+      modal: false,
+      cover: ""
     };
   }
 
@@ -27,7 +28,7 @@ export default class BookDetails extends Component {
     axios
       .get("http://localhost:4000/books/" + this.props.match.params.id)
       .then(response => {
-        this.setState({ book: response.data });
+        this.setState({ book: response.data, cover: response.data.cover });
       })
       .catch(function(err) {
         console.log(err);
@@ -65,14 +66,39 @@ export default class BookDetails extends Component {
 
     sessionStorage.setItem("cart", JSON.stringify(existing));
   };
+  getImages = cover => {
+    let imagesURL = [
+      "./images/csharp.jpg",
+      "./images/css.jpg",
+      "./images/javascript.jpg",
+      "./images/json.jpg",
+      "./images/lpthw.jpg",
+      "./images/mongodb.jpg",
+      "./images/node.jpg",
+      "./images/php.jpg",
+      "./images/python.jpg",
+      "./images/sql.jpg"
+    ];
+
+    const bookUrl = `./images/${cover}`;
+    let coverUrl = "./images/nocover.jpg";
+    imagesURL.forEach(url => {
+      if (url == bookUrl) {
+        coverUrl = bookUrl;
+      }
+    });
+
+    return coverUrl;
+  };
 
   render() {
     const { book, quantity } = this.state;
+    let src = this.getImages(this.state.cover);
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
-            <img src={`../images/${book.cover}`}></img>
+            <img src={require("" + src)} width="350" height="500"></img>
           </div>
           <div className="col-sm-6">
             <h2>{book.title}</h2>
